@@ -1,6 +1,8 @@
 // Componente de perfil de usuario que maneja la informacion del usuario
 // Como por ejemplo: Nombre/Username, Foto de perfil, email, etc.
 
+//https://jsonplaceholder.typicode.com/
+
 import React from 'react';
 import './profile.css';
 
@@ -21,6 +23,20 @@ export default class Profile extends React.Component {
         this.setState({
         user: this.props.user,
         });
+
+        fetch('https://jsonplaceholder.typicode.com/users/2')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json)
+            this.setState({
+                user: {
+                    name: json.name,
+                    username: json.username,
+                    email: json.email,
+                    photo: this.props.user.photo
+                }
+            })
+        })  
     }
     
     render() {
